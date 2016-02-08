@@ -7,6 +7,7 @@ int main()
 	scanf("%d",&n);
 	printf("%d\n",n);
 	for(i=0;i<n;i++)
-		printf("%d ",5*n-3*i+2);
+		printf("%d ",i);
+	printf("%ld", random()%n);
 
 }
