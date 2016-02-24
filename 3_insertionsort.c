@@ -2,10 +2,10 @@
 int count=0;
 int main()
 {
-	int a[1010],n,i,j,temp,minpos;
+	int a[10010],n,i,j,temp;
 	scanf("%d",&n); 
 	for(i=0;i<n;i++)
-		scanf("%d",a+i);
+		scanf("%d",&a[i]);
 
 	for(i=1;i<n;i++)
 	{
@@ -14,8 +14,8 @@ int main()
 		while( j>0 && a[j-1]>a[j])
 		{
 			temp=a[j];
-			a[j]=a[j+1];
-			a[j+1]=temp;
+			a[j]=a[j-1];
+			a[j-1]=temp;
 			count+=4;
 			j--;
 		}
