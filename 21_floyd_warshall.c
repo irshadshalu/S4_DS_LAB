@@ -10,7 +10,7 @@ int main()
 	int graph[100][100],v,e,i,j,k;
 	printf("Enter number of vertices : ");
 	scanf("%d",&v);
-	//filling
+	//filling all infinity 
 	FOR(i,v)
 		FOR(j,v)
 			graph[i][j]=INF;
@@ -18,7 +18,7 @@ int main()
 	printf("Enter number of edges : ");
 	scanf("%d",&e);
 
-	printf("Enter  %d each edge as from, to, weight ( 0 indexed ) : \n",e );
+	printf("Enter  %d edges each as from, to, weight ( 0 indexed ) : \n",e );
 	FOR(i,e)
 	{
 		int x,y,w;
@@ -38,9 +38,9 @@ int main()
 		printf("\n");
 	}
 
-	FOR(i,v)
-		FOR(j,v)
-			FOR(k,v)
+	FOR(k,v)
+		FOR(i,v)
+			FOR(j,v)
 				graph[i][j]=min(graph[i][j],graph[i][k]+graph[k][j]);
 
 	printf("\n\n Shortest distance between each vertices are \n\n\n");

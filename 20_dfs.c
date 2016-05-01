@@ -72,62 +72,38 @@ Graph inputGraph()
 }
 
 
-// Queue for bfs implementation
-int queue[100],front=0,rear=-1;
-// simple implementation, no overflow/underflow check
-// so, it's assumed that isempty wll be checked before dequeing
-void enque(int n)
+void dfs_visit(Graph *g,int u)
 {
-  rear++;
-  queue[rear]=n;
-}
-int deque()
-{
-  front++;
-  return queue[front-1];
-}
-int isempty(){
-  return front>rear;
-}
-void bfs(Graph *g)
-{
-  printf("Enter Starting node : ");
-  int s,u,i;
-  scanf("%d",&s);
-  printf("\tBFS : \n\n| Vertex | Parent | Distance |\n");
-// Algorithm  exactly as in clrs textbook
-  for(i=0; i < g -> n_v ; i++){
-    g -> nodes[i].color = WHITE;
-    g -> nodes[i].distance = INF;
-    g -> nodes[i].parent = -1;
-  }
-  g->nodes[s].color=GRAY;
-  g->nodes[s].distance=0;
-  
-  enque(s);
-  while(!isempty())
-  {
-    u=deque();
-    List *cur= g -> nodes[u].link -> next; // first one is sentinel, so next
-    while(cur != NULL)
+
+    printf("%5d %5d \n",u, g->nodes[u].parent );
+  g->nodes[u].color=GRAY;
+  List *cur=g ->nodes[u].link->next;
+   while(cur != NULL)
     {
       if(g -> nodes[cur -> vertex].color == WHITE)
       {
-        g -> nodes[cur -> vertex].color = GRAY;
-        g -> nodes[cur -> vertex].distance = g -> nodes[u].distance + 1;
         g -> nodes[cur -> vertex].parent = u;
-        enque(cur -> vertex);
+        dfs_visit(g,cur -> vertex);
       }
       cur=cur->next;
     }
-    g -> nodes[u].color = BLACK;
-    printf("| %6d | %6d | %8d |\n",u,g ->nodes[u].parent,g->nodes[u].distance );
+  g->nodes[u].color=BLACK;
+}
+
+void dfs(Graph *g)
+{
+  int i;
+   for(i=0; i < g -> n_v ; i++){
+    g -> nodes[i].color = WHITE;
+    g -> nodes[i].parent = -1;
   }
-   
+   for(i=0; i < g -> n_v ; i++){
+    if(g -> nodes[i].color == WHITE)
+      dfs_visit(g,i);
+  }
 }
 
  int main(){
-  int i,j;
   Graph g=inputGraph();
-  bfs(&g);
+  dfs(&g);
 } 
