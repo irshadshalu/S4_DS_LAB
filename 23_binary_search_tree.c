@@ -12,12 +12,12 @@ struct node
 	struct node *left,*right,*parent;
 }*root;
 
-void inorder(struct node *root);
-void preorder(struct node *root);
-void postorder(struct node *root);
+void inorder(struct node *x);
+void preorder(struct node *x);
+void postorder(struct node *x);
 
 struct node* search(int k);
-struct node *minimum(struct node *x);
+struct node* minimum(struct node *x);
 void insert(struct node *z);
 void transplant(struct node *u,struct node *v);
 void delete(struct node *z);
@@ -78,38 +78,38 @@ int main()
 	
 }
 
-void inorder(struct node *root)
+void inorder(struct node *x)
 {
-	if(root!=NULL)
+	if(x!=NULL)
 	{
-		inorder( root-> left);
-		printf("%d ",root -> data);
-		inorder(root -> right);
+		inorder( x-> left);
+		printf("%d ",x -> data);
+		inorder(x -> right);
 	}
 }
-void postorder(struct node *root)
+void postorder(struct node *x)
 {
-	if(root!=NULL)
+	if(x!=NULL)
 	{
-		postorder( root-> left);
-		postorder(root -> right);
-		printf("%d ",root -> data);
+		postorder( x-> left);
+		postorder(x -> right);
+		printf("%d ",x -> data);
 	}
 }
-void preorder(struct node *root)
+void preorder(struct node *x)
 {
-	if(root!=NULL)
+	if(x!=NULL)
 	{
-		printf("%d ",root -> data);
-		preorder( root-> left);
-		preorder(root -> right);
+		printf("%d ",x -> data);
+		preorder( x-> left);
+		preorder(x -> right);
 	}
 }
 
 
 struct node* search(int k)
 {
-	struct node *x=root;
+	struct node *x=root; 
 	while( x!= NULL && k!= x -> data)
 	{
 		if(k < x-> data)
